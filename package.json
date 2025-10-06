@@ -1,24 +1,28 @@
 {
   "name": "capturezone-ctf",
   "version": "1.0.0",
-  "description": "CaptureZone CTF Platform - Full Stack Application",
+  "description": "CaptureZone CTF Platform - Backend Service",
   "main": "backend/server.js",
   "scripts": {
-    "start": "cd backend && npm start",
-    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\"",
-    "install-backend": "cd backend && npm install",
-    "install-frontend": "cd frontend && npm install",
-    "install-all": "npm run install-backend && npm run install-frontend",
-    "build": "cd frontend && npm run build",
-    "heroku-postbuild": "npm run install-all && npm run build"
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js",
+    "build": "echo 'No build step required'"
   },
-  "keywords": ["ctf", "cybersecurity", "mern", "education"],
+  "keywords": ["ctf", "cybersecurity", "education"],
   "author": "CyberSphere Labs",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "concurrently": "^8.2.2"
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.0",
+    "pug": "^3.0.3"
   }
 }
