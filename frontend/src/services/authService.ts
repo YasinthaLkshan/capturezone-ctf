@@ -69,12 +69,17 @@ export interface UserResponse {
 export const authService = {
   async login(username: string, password: string): Promise<LoginResponse> {
     try {
+      console.log('Login API URL:', API_BASE_URL);
+      console.log('Calling:', `${API_BASE_URL}/auth/login`);
+      
       const response = await api.post('/auth/login', {
         username,
         password,
       });
       return response.data;
     } catch (error: any) {
+      console.error('Login error:', error);
+      console.error('Error response:', error.response);
       throw new Error(error.response?.data?.message || 'Login failed');
     }
   },
