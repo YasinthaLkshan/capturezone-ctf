@@ -61,20 +61,10 @@ db.once('open', () => {
 
 // Routes
 console.log('Loading auth routes...');
-try {
-  const authRoutes = require('./routes/auth');
-  console.log('Auth routes loaded successfully, type:', typeof authRoutes);
-  app.use('/api/auth', authRoutes);
-} catch (error) {
-  console.error('Error loading auth routes:', error.message);
-  // Create a fallback auth route
-  app.post('/api/auth/register', (req, res) => {
-    res.json({ message: 'Fallback auth route - database connection issue', error: error.message });
-  });
-  app.post('/api/auth/login', (req, res) => {
-    res.json({ message: 'Fallback auth route - database connection issue', error: error.message });
-  });
-}
+const authRoutes = require('./routes/auth');
+console.log('Auth routes loaded successfully, type:', typeof authRoutes);
+console.log('Auth routes stack length:', authRoutes.stack ? authRoutes.stack.length : 'No stack');
+app.use('/api/auth', authRoutes);
 
 app.use('/api/modules', require('./routes/modules'));
 app.use('/api/flags', require('./routes/flags'));
