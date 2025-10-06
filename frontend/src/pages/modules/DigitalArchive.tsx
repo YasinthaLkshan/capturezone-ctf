@@ -28,10 +28,6 @@ const DigitalArchive: React.FC = () => {
     setUrl('');
   };
 
-  const tryExampleUrl = (exampleUrl: string) => {
-    setUrl(exampleUrl);
-  };
-
   return (
     <div>
       {/* Header */}

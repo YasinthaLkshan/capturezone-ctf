@@ -66,19 +66,6 @@ const AdminPortal: React.FC = () => {
     setResult(null);
   };
 
-  const loadExamplePayload = (payload: string) => {
-    setJsonPayload(payload);
-    setLoginMode('json');
-  };
-
-  const examplePayloads = {
-    normal: '{\n  "username": "admin",\n  "password": "secret123"\n}',
-    neInjection: '{\n  "username": {"$ne": null},\n  "password": {"$ne": null}\n}',
-    regexInjection: '{\n  "username": {"$regex": "admin"},\n  "password": {"$ne": null}\n}',
-    gtInjection: '{\n  "username": {"$gt": ""},\n  "password": {"$gt": ""}\n}',
-    whereInjection: '{\n  "username": {"$where": "return true"},\n  "password": "anything"\n}'
-  };
-
   return (
     <div>
       {/* Header */}

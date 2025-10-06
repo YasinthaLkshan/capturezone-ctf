@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { apiService } from '../../services/apiService';
 
 const FeedbackPortal: React.FC = () => {
@@ -11,7 +11,6 @@ const FeedbackPortal: React.FC = () => {
   });
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<any>(null);
-  const [feedbackDisplay, setFeedbackDisplay] = useState<any>(null);
   const displayRef = useRef<HTMLDivElement>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -26,7 +25,6 @@ const FeedbackPortal: React.FC = () => {
     e.preventDefault();
     setSubmitting(true);
     setResult(null);
-    setFeedbackDisplay(null);
 
     try {
       const response = await apiService.submitFeedback(formData);
@@ -34,7 +32,6 @@ const FeedbackPortal: React.FC = () => {
       
       // Display the feedback (vulnerable to DOM-based XSS)
       if (response.data) {
-        setFeedbackDisplay(response.data);
         
         // Intentionally vulnerable: Direct HTML insertion
         if (displayRef.current) {
@@ -73,7 +70,6 @@ const FeedbackPortal: React.FC = () => {
       rating: 5
     });
     setResult(null);
-    setFeedbackDisplay(null);
     if (displayRef.current) {
       displayRef.current.innerHTML = '';
     }

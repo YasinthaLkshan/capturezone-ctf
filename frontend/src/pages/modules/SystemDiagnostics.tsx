@@ -29,20 +29,6 @@ const SystemDiagnostics: React.FC = () => {
     setResult(null);
   };
 
-  const loadExampleCredentials = (username: string, password: string, token?: string) => {
-    setUsername(username);
-    setPassword(password);
-    setSessionToken(token || '');
-  };
-
-  const exampleCredentials = {
-    basic: { username: 'admin', password: 'password123', token: '' },
-    weak: { username: 'admin', password: '123', token: '' },
-    bypass: { username: 'admin', password: '', token: 'admin_session_token' },
-    sqlInjection: { username: 'admin\' OR \'1\'=\'1', password: 'anything', token: '' },
-    sessionReuse: { username: 'guest', password: 'guest', token: 'expired_admin_token_abc123' }
-  };
-
   return (
     <div>
       {/* Header */}
