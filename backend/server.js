@@ -14,12 +14,27 @@ app.use(helmet({
 }));
 
 app.use(cors({
-  origin: [
-    'http://localhost:3000', // Local development
-    'https://golden-platypus-e7c981.netlify.app', // Old Netlify frontend
-    'https://capturezone-ctf-production.up.railway.app', // Allow self-requests
-    /https:\/\/.*\.vercel\.app$/ // Allow any Vercel domain
-  ],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'https://golden-platypus-e7c981.netlify.app',
+      'https://capturezone-ctf-production.up.railway.app'
+    ];
+    
+    // Allow any Vercel domain
+    if (origin.includes('.vercel.app')) {
+      return callback(null, true);
+    }
+    
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
 
@@ -74,31 +89,22 @@ app.use('/api/progress', require('./routes/progress'));
 // Vulnerable endpoints for CTF modules
 app.use('/api/vulnerable', require('./routes/vulnerable'));
 
+// Simple test endpoint
+app.get('/api/connection-test', (req, res) => {
+  res.json({ 
+    message: 'Backend connection successful',
+    timestamp: new Date(),
+    origin: req.headers.origin || 'no-origin'
+  });
+});
+
 // Test route to check environment
 app.get('/api/env-test', (req, res) => {
   res.json({
     hasMongoUri: !!process.env.MONGODB_URI,
     hasDbPassword: !!process.env.DB_PASSWORD,
     nodeEnv: process.env.NODE_ENV,
-    mongoUriSample: process.env.MONGODB_URI ? process.env.MONGODB_URI.substring(0, 20) + '...' : 'not found',
-    corsOrigins: app._router.stack.find(layer => layer.name === 'corsMiddleware') ? 'CORS enabled' : 'No CORS',
     timestamp: new Date()
-  });
-});
-
-// CORS test endpoint
-app.options('/api/cors-test', (req, res) => {
-  res.header('Access-Control-Allow-Origin', req.headers.origin);
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.sendStatus(200);
-});
-
-app.get('/api/cors-test', (req, res) => {
-  res.json({ 
-    message: 'CORS test successful', 
-    origin: req.headers.origin,
-    timestamp: new Date() 
   });
 });
 
