@@ -20,6 +20,7 @@ app.use(cors({
     
     const allowedOrigins = [
       'http://localhost:3000',
+      'http://localhost:3001', // Added port 3001
       'https://golden-platypus-e7c981.netlify.app',
       'https://capturezone-ctf-production.up.railway.app'
     ];
@@ -33,6 +34,7 @@ app.use(cors({
       return callback(null, true);
     }
     
+    console.log('CORS blocked origin:', origin);
     return callback(new Error('Not allowed by CORS'));
   },
   credentials: true
