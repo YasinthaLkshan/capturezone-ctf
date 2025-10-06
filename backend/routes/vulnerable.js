@@ -47,9 +47,19 @@ router.post('/feedback', async (req, res) => {
         rating: rating,
         submittedAt: feedback.createdAt
       },
-      // Hidden flag check
-      flag: message && message.includes('<script>') && message.includes('alert') ? 
-        Buffer.from(process.env.FLAG_MODULE_1 || '', 'base64').toString() : null
+      // Flag check - reveal flag when XSS payload is detected
+      flag: message && (
+        message.includes('<script>') || 
+        message.includes('javascript:') || 
+        message.includes('onerror=') || 
+        message.includes('onload=') || 
+        message.includes('onclick=') ||
+        message.includes('<img') && message.includes('onerror')
+      ) ? (
+        process.env.FLAG_MODULE_1 ? 
+          Buffer.from(process.env.FLAG_MODULE_1, 'base64').toString() : 
+          'CYBER{x55_1n_f33db4ck_p0rt4l}'
+      ) : null
     });
 
   } catch (error) {
@@ -91,8 +101,17 @@ router.post('/archive/fetch', (req, res) => {
           success: true,
           url: targetUrl,
           data: data,
-          flag: isInternalRequest && data.includes('admin') ? 
-            Buffer.from(process.env.FLAG_MODULE_2 || '', 'base64').toString() : null
+          flag: (targetUrl.includes('localhost') || 
+                targetUrl.includes('127.0.0.1') ||
+                targetUrl.includes('internal') ||
+                targetUrl.includes('file://') ||
+                targetUrl.includes('192.168') ||
+                targetUrl.includes('10.') ||
+                targetUrl.includes('169.254')) ? (
+            process.env.FLAG_MODULE_2 ? 
+              Buffer.from(process.env.FLAG_MODULE_2, 'base64').toString() : 
+              'CYBER{55rf_3xpl01t_5ucc355}'
+          ) : null
         });
       });
     });
@@ -187,8 +206,11 @@ router.post('/system-auth', async (req, res) => {
         sessionId: sessionId,
         authMethod: authMethod,
         adminAccess: adminAccess,
-        flag: adminAccess ? 
-          Buffer.from(process.env.FLAG_MODULE_3 || '', 'base64').toString() : null
+        flag: adminAccess ? (
+          process.env.FLAG_MODULE_3 ? 
+            Buffer.from(process.env.FLAG_MODULE_3, 'base64').toString() : 
+            'CYBER{br0k3n_4uth_byp455}'
+        ) : null
       });
     } else {
       res.status(401).json({ 
@@ -238,7 +260,9 @@ router.post('/admin/login', async (req, res) => {
           permissions: admin.permissions,
           lastLogin: admin.lastLogin
         },
-        flag: Buffer.from(process.env.FLAG_MODULE_4 || '', 'base64').toString()
+        flag: process.env.FLAG_MODULE_4 ? 
+          Buffer.from(process.env.FLAG_MODULE_4, 'base64').toString() : 
+          'CYBER{n05ql_1nj3ct10n_pwn3d}'
       });
     } else {
       res.status(401).json({ 

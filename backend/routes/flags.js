@@ -20,12 +20,20 @@ router.post('/validate', async (req, res) => {
       return res.status(401).json({ error: 'User not found' });
     }
 
-    // Define correct flags
+    // Define correct flags with fallback defaults
     const correctFlags = {
-      1: Buffer.from(process.env.FLAG_MODULE_1 || '', 'base64').toString(),
-      2: Buffer.from(process.env.FLAG_MODULE_2 || '', 'base64').toString(),
-      3: Buffer.from(process.env.FLAG_MODULE_3 || '', 'base64').toString(),
-      4: Buffer.from(process.env.FLAG_MODULE_4 || '', 'base64').toString()
+      1: process.env.FLAG_MODULE_1 ? 
+         Buffer.from(process.env.FLAG_MODULE_1, 'base64').toString() : 
+         'CYBER{x55_1n_f33db4ck_p0rt4l}',
+      2: process.env.FLAG_MODULE_2 ? 
+         Buffer.from(process.env.FLAG_MODULE_2, 'base64').toString() : 
+         'CYBER{55rf_3xpl01t_5ucc355}',
+      3: process.env.FLAG_MODULE_3 ? 
+         Buffer.from(process.env.FLAG_MODULE_3, 'base64').toString() : 
+         'CYBER{br0k3n_4uth_byp455}',
+      4: process.env.FLAG_MODULE_4 ? 
+         Buffer.from(process.env.FLAG_MODULE_4, 'base64').toString() : 
+         'CYBER{n05ql_1nj3ct10n_pwn3d}'
     };
 
     const correctFlag = correctFlags[moduleId];
