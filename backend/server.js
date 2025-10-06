@@ -80,7 +80,25 @@ app.get('/api/env-test', (req, res) => {
     hasMongoUri: !!process.env.MONGODB_URI,
     hasDbPassword: !!process.env.DB_PASSWORD,
     nodeEnv: process.env.NODE_ENV,
-    mongoUriSample: process.env.MONGODB_URI ? process.env.MONGODB_URI.substring(0, 20) + '...' : 'not found'
+    mongoUriSample: process.env.MONGODB_URI ? process.env.MONGODB_URI.substring(0, 20) + '...' : 'not found',
+    corsOrigins: app._router.stack.find(layer => layer.name === 'corsMiddleware') ? 'CORS enabled' : 'No CORS',
+    timestamp: new Date()
+  });
+});
+
+// CORS test endpoint
+app.options('/api/cors-test', (req, res) => {
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.sendStatus(200);
+});
+
+app.get('/api/cors-test', (req, res) => {
+  res.json({ 
+    message: 'CORS test successful', 
+    origin: req.headers.origin,
+    timestamp: new Date() 
   });
 });
 
