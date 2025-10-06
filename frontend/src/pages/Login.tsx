@@ -26,6 +26,26 @@ const Login: React.FC = () => {
     }
   };
 
+  const testConnection = async () => {
+    console.log('Testing direct API connection...');
+    try {
+      const response = await fetch('https://capturezone-ctf-production.up.railway.app/api/auth/test', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      
+      console.log('Test response status:', response.status);
+      const data = await response.text();
+      console.log('Test response data:', data);
+      alert(`Test Result: Status ${response.status}, Data: ${data}`);
+    } catch (error) {
+      console.error('Test connection error:', error);
+      alert(`Test Error: ${error}`);
+    }
+  };
+
   return (
     <div className="card" style={{ maxWidth: '500px', margin: '2rem auto' }}>
       <div className="card-header">
@@ -77,6 +97,15 @@ const Login: React.FC = () => {
           style={{ width: '100%', marginBottom: '1rem' }}
         >
           {loading ? <span className="loading"></span> : '⚡ Initialize Session'}
+        </button>
+
+        <button 
+          type="button" 
+          onClick={testConnection}
+          className="btn" 
+          style={{ width: '100%', marginBottom: '1rem', backgroundColor: '#ffaa00', color: '#000' }}
+        >
+          🔧 Test API Connection
         </button>
       </form>
 
