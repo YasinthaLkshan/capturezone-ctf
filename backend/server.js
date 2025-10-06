@@ -30,13 +30,27 @@ app.set('view engine', 'pug');
 app.set('views', './views');
 
 // Database connection
+console.log('Environment check:');
+console.log('- NODE_ENV:', process.env.NODE_ENV);
+console.log('- DB_PASSWORD exists:', !!process.env.DB_PASSWORD);
+console.log('- MONGODB_URI exists:', !!process.env.MONGODB_URI);
+
 const mongoUri = process.env.MONGODB_URI?.replace('<db_password>', process.env.DB_PASSWORD) || 'mongodb://localhost:27017/cybersphere-labs';
+console.log('Final MongoDB URI (password hidden):', mongoUri.replace(process.env.DB_PASSWORD || '', '***'));
+
 console.log('Connecting to MongoDB...');
 mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
   socketTimeoutMS: 45000, // Close sockets after 45s
+})
+.then(() => {
+  console.log('✅ MongoDB connected successfully');
+})
+.catch((error) => {
+  console.error('❌ MongoDB connection failed:', error.message);
+  console.error('Full error:', error);
 });
 
 const db = mongoose.connection;
@@ -68,6 +82,16 @@ app.use('/api/progress', require('./routes/progress'));
 
 // Vulnerable endpoints for CTF modules
 app.use('/api/vulnerable', require('./routes/vulnerable'));
+
+// Test route to check environment
+app.get('/api/env-test', (req, res) => {
+  res.json({
+    hasMongoUri: !!process.env.MONGODB_URI,
+    hasDbPassword: !!process.env.DB_PASSWORD,
+    nodeEnv: process.env.NODE_ENV,
+    mongoUriSample: process.env.MONGODB_URI ? process.env.MONGODB_URI.substring(0, 20) + '...' : 'not found'
+  });
+});
 
 // Test route
 app.get('/api/test', (req, res) => {
