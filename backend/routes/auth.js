@@ -4,6 +4,11 @@ const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 const router = express.Router();
 
+// Test route to verify auth routes are working
+router.get('/test', (req, res) => {
+  res.json({ message: 'Auth routes are working!', timestamp: new Date() });
+});
+
 // Register endpoint
 router.post('/register', [
   body('username').isLength({ min: 3 }).trim().escape(),
