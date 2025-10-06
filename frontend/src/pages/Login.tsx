@@ -29,17 +29,30 @@ const Login: React.FC = () => {
   const testConnection = async () => {
     console.log('Testing direct API connection...');
     try {
-      const response = await fetch('https://capturezone-ctf-production.up.railway.app/api/auth/test', {
+      // Test both the working endpoint and the login endpoint
+      console.log('Testing /api/auth/test...');
+      const testResponse = await fetch('https://capturezone-ctf-production.up.railway.app/api/auth/test', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         }
       });
+      console.log('Test endpoint - Status:', testResponse.status, 'Data:', await testResponse.text());
       
-      console.log('Test response status:', response.status);
-      const data = await response.text();
-      console.log('Test response data:', data);
-      alert(`Test Result: Status ${response.status}, Data: ${data}`);
+      console.log('Testing /api/auth/login...');
+      const loginResponse = await fetch('https://capturezone-ctf-production.up.railway.app/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: 'test', password: 'test' })
+      });
+      
+      console.log('Login endpoint - Status:', loginResponse.status);
+      const loginData = await loginResponse.text();
+      console.log('Login endpoint - Data:', loginData);
+      
+      alert(`Login Test: Status ${loginResponse.status}, Data: ${loginData.substring(0, 100)}...`);
     } catch (error) {
       console.error('Test connection error:', error);
       alert(`Test Error: ${error}`);
