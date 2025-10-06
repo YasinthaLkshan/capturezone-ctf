@@ -43,13 +43,22 @@ db.once('open', () => {
 });
 
 // Routes
-app.use('/api/auth', require('./routes/auth'));
+console.log('Loading auth routes...');
+const authRoutes = require('./routes/auth');
+console.log('Auth routes loaded, type:', typeof authRoutes);
+app.use('/api/auth', authRoutes);
+
 app.use('/api/modules', require('./routes/modules'));
 app.use('/api/flags', require('./routes/flags'));
 app.use('/api/progress', require('./routes/progress'));
 
 // Vulnerable endpoints for CTF modules
 app.use('/api/vulnerable', require('./routes/vulnerable'));
+
+// Test route
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'Test route works!', timestamp: new Date() });
+});
 
 // Root route
 app.get('/', (req, res) => {
@@ -59,7 +68,8 @@ app.get('/', (req, res) => {
     endpoints: {
       health: '/api/health',
       auth: '/api/auth',
-      modules: '/api/modules'
+      modules: '/api/modules',
+      test: '/api/test'
     }
   });
 });
