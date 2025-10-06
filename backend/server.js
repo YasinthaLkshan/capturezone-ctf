@@ -50,6 +50,19 @@ app.use('/api/progress', require('./routes/progress'));
 // Vulnerable endpoints for CTF modules
 app.use('/api/vulnerable', require('./routes/vulnerable'));
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'CyberSphere Labs CTF Platform API', 
+    status: 'Running',
+    endpoints: {
+      health: '/api/health',
+      auth: '/api/auth',
+      modules: '/api/modules'
+    }
+  });
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ message: 'CyberSphere Labs API is running', timestamp: new Date() });
