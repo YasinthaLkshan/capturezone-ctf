@@ -14,7 +14,10 @@ app.use(helmet({
 }));
 
 app.use(cors({
-  origin: true, // Allow all origins for development
+  origin: [
+    'http://localhost:3000', // Local development
+    'https://golden-platypus-e7c981.netlify.app' // Production frontend
+  ],
   credentials: true
 }));
 
