@@ -16,7 +16,8 @@ app.use(helmet({
 app.use(cors({
   origin: [
     'http://localhost:3000', // Local development
-    'https://golden-platypus-e7c981.netlify.app' // Production frontend
+    'https://golden-platypus-e7c981.netlify.app', // Production frontend
+    'https://capturezone-ctf-production.up.railway.app' // Allow self-requests
   ],
   credentials: true
 }));
