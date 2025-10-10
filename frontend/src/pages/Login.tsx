@@ -26,39 +26,6 @@ const Login: React.FC = () => {
     }
   };
 
-  const testConnection = async () => {
-    console.log('Testing direct API connection...');
-    try {
-      // Test both the working endpoint and the login endpoint
-      console.log('Testing /api/auth/test...');
-      const testResponse = await fetch('https://capturezone-ctf-production.up.railway.app/api/auth/test', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
-      console.log('Test endpoint - Status:', testResponse.status, 'Data:', await testResponse.text());
-      
-      console.log('Testing /api/auth/login...');
-      const loginResponse = await fetch('https://capturezone-ctf-production.up.railway.app/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username: 'test', password: 'test' })
-      });
-      
-      console.log('Login endpoint - Status:', loginResponse.status);
-      const loginData = await loginResponse.text();
-      console.log('Login endpoint - Data:', loginData);
-      
-      alert(`Login Test: Status ${loginResponse.status}, Data: ${loginData.substring(0, 100)}...`);
-    } catch (error) {
-      console.error('Test connection error:', error);
-      alert(`Test Error: ${error}`);
-    }
-  };
-
   return (
     <div className="card" style={{ maxWidth: '500px', margin: '2rem auto' }}>
       <div className="card-header">
@@ -110,15 +77,6 @@ const Login: React.FC = () => {
           style={{ width: '100%', marginBottom: '1rem' }}
         >
           {loading ? <span className="loading"></span> : '⚡ Initialize Session'}
-        </button>
-
-        <button 
-          type="button" 
-          onClick={testConnection}
-          className="btn" 
-          style={{ width: '100%', marginBottom: '1rem', backgroundColor: '#ffaa00', color: '#000' }}
-        >
-          🔧 Test API Connection
         </button>
       </form>
 
