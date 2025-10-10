@@ -58,8 +58,6 @@ console.log('Final MongoDB URI (password hidden):', mongoUri.replace(process.env
 
 console.log('Connecting to MongoDB...');
 mongoose.connect(mongoUri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
   serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
   socketTimeoutMS: 45000, // Close sockets after 45s
 })
