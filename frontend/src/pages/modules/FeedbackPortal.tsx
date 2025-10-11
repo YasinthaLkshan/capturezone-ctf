@@ -157,7 +157,7 @@ const FeedbackPortal: React.FC = () => {
               className="form-control"
               value={formData.message}
               onChange={handleInputChange}
-              placeholder="Enter your feedback message... Try: &lt;script&gt;alert('XSS')&lt;/script&gt;"
+              placeholder="Enter your feedback message..."
               rows={5}
               required
             />
