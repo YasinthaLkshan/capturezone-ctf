@@ -67,7 +67,7 @@ const Dashboard: React.FC = () => {
             WebkitTextFillColor: 'transparent',
             marginBottom: '1rem'
           }}>
-            🎯 Welcome to CaptureZone
+            Welcome to CaptureZone
           </h1>
           <p style={{ 
             color: '#ffaa00', 
