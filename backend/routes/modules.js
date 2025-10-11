@@ -91,26 +91,31 @@ router.post('/init', async (req, res) => {
           name: 'system-diagnostics',
           title: 'Broken Authentication',
           description: 'A vulnerable authentication system demonstrating common authentication security flaws and bypass techniques.',
-          vulnerability: 'SSTI',
-          owaspCategory: 'A03:2021 – Injection',
+          vulnerability: 'Broken Authentication',
+          owaspCategory: 'A02:2021 – Broken Authentication',
           difficulty: 'Hard',
-          flag: 'CYBER{ssti_flag}',
+          flag: 'CYBER{broken_auth_flag}',
           hints: [
-            'The system uses templates to generate reports',
-            'Template engines can execute code if input is not sanitized',
-            'Try injecting template syntax into user inputs'
+            'The system has weak authentication controls and password policies',
+            'Try common weak passwords or credential combinations',
+            'Session tokens might bypass password requirements',
+            'SQL injection can sometimes bypass authentication logic'
           ],
           documentation: {
-            overview: 'Server-Side Template Injection occurs when user input is embedded into templates without proper sanitization.',
-            vulnerability_details: 'The authentication system uses Pug templates with user-controlled input.',
+            overview: 'Broken Authentication vulnerabilities occur when authentication and session management are implemented incorrectly, allowing attackers to compromise passwords, keys, or session tokens.',
+            vulnerability_details: 'This authentication portal has multiple security weaknesses including weak password policies, improper session management, and insufficient input validation that can be exploited to bypass authentication.',
             exploitation_steps: [
               'Access the Broken Authentication module',
-              'Inject template syntax: #{process.version}',
-              'Try accessing global objects through template injection',
-              'The flag will be revealed when successful template injection is detected'
+              'Try weak credentials like admin:123 or admin:password',
+              'Attempt SQL injection in the username field: admin\' OR \'1\'=\'1',
+              'Test session token bypass by using tokens without passwords',
+              'The flag will be revealed when successful authentication bypass is detected'
             ],
-            prevention: 'Never embed user input directly into templates. Use parameterized templates.',
-            references: ['https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/07-Input_Validation_Testing/18-Testing_for_Server_Side_Template_Injection']
+            prevention: 'Implement strong password policies, multi-factor authentication, proper session management, and input validation. Use secure authentication frameworks.',
+            references: [
+              'https://owasp.org/Top10/A02_2021-Cryptographic_Failures/',
+              'https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html'
+            ]
           }
         },
         {
