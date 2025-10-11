@@ -34,15 +34,15 @@ const SystemDiagnostics: React.FC = () => {
       {/* Header */}
       <div className="card">
         <div className="card-header">
-          <h1 className="card-title">🔧 CaptureZone System Diagnostics</h1>
+          <h1 className="card-title">� Broken Authentication Challenge</h1>
           <p style={{ color: '#ffaa00' }}>
-            Authenticate to access system diagnostics and monitoring tools
+            Exploit authentication vulnerabilities to bypass security controls and gain unauthorized access
           </p>
         </div>
 
         <div className="alert alert-warning">
-          <strong>🎯 Challenge:</strong> This authentication system contains a Broken Authentication vulnerability. 
-          Try bypassing authentication using weak credentials, session manipulation, or injection techniques.
+          <strong>🎯 Challenge:</strong> This authentication system demonstrates common Broken Authentication vulnerabilities. 
+          Try bypassing authentication using weak credentials, SQL injection, session manipulation, or other authentication bypass techniques.
         </div>
       </div>
 

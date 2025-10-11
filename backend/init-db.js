@@ -117,8 +117,8 @@ async function initializeDatabase() {
       {
         id: 3,
         name: 'system-diagnostics',
-        title: 'System Diagnostics',
-        description: 'A secure system access portal that requires authentication to access diagnostic tools and monitoring capabilities.',
+        title: 'Broken Authentication',
+        description: 'A vulnerable authentication system that demonstrates common authentication flaws and security weaknesses. Test various bypass techniques to access restricted areas.',
         vulnerability: 'Broken Authentication',
         owaspCategory: 'A02:2021 – Broken Authentication',
         difficulty: 'Hard',
@@ -131,9 +131,9 @@ async function initializeDatabase() {
         ],
         documentation: {
           overview: 'Broken Authentication vulnerabilities occur when authentication and session management are implemented incorrectly, allowing attackers to compromise passwords, keys, or session tokens.',
-          vulnerability_details: 'The system diagnostics portal has multiple authentication weaknesses including weak password policies, improper session management, and insufficient input validation.',
+          vulnerability_details: 'This authentication portal has multiple security weaknesses including weak password policies, improper session management, and insufficient input validation that can be exploited to bypass authentication.',
           exploitation_steps: [
-            'Navigate to the System Diagnostics module',
+            'Navigate to the Broken Authentication module',
             'Try weak credentials like admin:123 or admin:password',
             'Attempt SQL injection in the username field: admin\' OR \'1\'=\'1',
             'Test session token bypass by using tokens without passwords',

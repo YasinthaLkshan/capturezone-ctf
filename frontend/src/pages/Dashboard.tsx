@@ -49,7 +49,7 @@ const Dashboard: React.FC = () => {
     const moduleNames = {
       1: 'Feedback Portal',
       2: 'Digital Archive',
-      3: 'System Diagnostics',
+      3: 'Broken Authentication',
       4: 'Admin Portal'
     };
     return moduleNames[moduleId as keyof typeof moduleNames] || `Module ${moduleId}`;

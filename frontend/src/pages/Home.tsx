@@ -82,7 +82,7 @@ const Home: React.FC = () => {
               <div className="module-difficulty difficulty-hard">HARD</div>
               <div className="module-icon">⚡</div>
             </div>
-            <h3 className="module-title">System Diagnostics</h3>
+            <h3 className="module-title">Broken Authentication</h3>
             <p className="module-description">Master Broken Authentication bypass techniques</p>
             <div className="module-tags">
               <span className="vulnerability-tag vuln-auth">AUTH</span>

@@ -89,8 +89,8 @@ router.post('/init', async (req, res) => {
         {
           id: 3,
           name: 'system-diagnostics',
-          title: 'System Diagnostics',
-          description: 'A system monitoring tool that generates dynamic reports.',
+          title: 'Broken Authentication',
+          description: 'A vulnerable authentication system demonstrating common authentication security flaws and bypass techniques.',
           vulnerability: 'SSTI',
           owaspCategory: 'A03:2021 – Injection',
           difficulty: 'Hard',
@@ -102,9 +102,9 @@ router.post('/init', async (req, res) => {
           ],
           documentation: {
             overview: 'Server-Side Template Injection occurs when user input is embedded into templates without proper sanitization.',
-            vulnerability_details: 'The diagnostics system uses Pug templates with user-controlled input.',
+            vulnerability_details: 'The authentication system uses Pug templates with user-controlled input.',
             exploitation_steps: [
-              'Access the system diagnostics module',
+              'Access the Broken Authentication module',
               'Inject template syntax: #{process.version}',
               'Try accessing global objects through template injection',
               'The flag will be revealed when successful template injection is detected'
