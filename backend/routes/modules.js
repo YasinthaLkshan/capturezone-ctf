@@ -89,8 +89,8 @@ router.post('/init', async (req, res) => {
         {
           id: 3,
           name: 'system-diagnostics',
-          title: 'System Diagnostics',
-          description: 'A system monitoring tool that generates dynamic reports.',
+          title: 'Broken Authentication',
+          description: 'An authentication portal with weak login logic. Discover how broken authentication leads to unauthorized access.',
           vulnerability: 'SSTI',
           owaspCategory: 'A03:2021 – Injection',
           difficulty: 'Hard',

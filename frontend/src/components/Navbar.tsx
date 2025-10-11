@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
             </li>
             <li>
               <Link to="/modules" className="nav-link">
-                Modules
+                Tasks
               </Link>
             </li>
             <li>

@@ -34,9 +34,9 @@ const SystemDiagnostics: React.FC = () => {
       {/* Header */}
       <div className="card">
         <div className="card-header">
-          <h1 className="card-title">🔧 CaptureZone System Diagnostics</h1>
+          <h1 className="card-title">🔧 CaptureZone Broken Authentication </h1>
           <p style={{ color: '#ffaa00' }}>
-            Authenticate to access system diagnostics and monitoring tools
+              Investigate and exploit authentication weaknesses to gain access.
           </p>
         </div>
 
